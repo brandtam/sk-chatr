@@ -1,17 +1,13 @@
 <script lang="ts">
 	import Message from '$lib/components/Message.svelte';
-	import { selectedBot } from '$lib/stores'
+	import { selectedBot, messages } from '$lib/stores'
 
 	import { SSE } from 'sse.js'
-	import type { ChatCompletionRequestMessage } from 'openai'
-
-	import type { ChatCompletionRequestMessageRoleEnum } from 'openai'
-	let type: ChatCompletionRequestMessageRoleEnum
 
 	let query: string = ''
 	let answer: string = ''
 	let loading: boolean = false
-	let messages: ChatCompletionRequestMessage[] = []
+
 	let scrollToDiv: HTMLDivElement
 
 
@@ -23,13 +19,13 @@
 
 	const handleSubmit = async () => {
 		loading = true
-		messages = [...messages, { role: 'user', content: query }]
+		messages.set([...$messages, { role: 'user', content: query }])
 
 		const eventSource = new SSE('/api/chat', {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			payload: JSON.stringify({ messages: messages, bot: $selectedBot })
+			payload: JSON.stringify({ messages: $messages, bot: $selectedBot })
 		})
 
 		query = ''
@@ -41,7 +37,7 @@
 			try {
 				loading = false
 				if (e.data === '[DONE]') {
-					messages = [...messages, { role: 'assistant', content: answer }]
+					$messages = [...$messages, { role: 'assistant', content: answer }]
 					answer = ''
 					return
 				}
@@ -89,7 +85,7 @@
 	</div>
 	<div class="px-6 py-4 flex-1 overflow-y-scroll">
 		<Message type="assistant" message="{$selectedBot.greeting}" />
-		{#each messages as message}
+		{#each $messages as message}
 			<Message type={message.role} message={message.content} />
 		{/each}
 		{#if answer}

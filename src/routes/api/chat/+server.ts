@@ -34,13 +34,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		const reqBot = requestData.bot;
-		const botId = Number(reqBot.id);
-		console.log(`\nbotId: ${botId}`);
-
 		const reqMessages: ChatCompletionRequestMessage[] = requestData.messages;
-		console.log(`reqMessages: ${JSON.stringify(reqMessages)}\n`);
-
-		// console.log(`reqBot: id:${reqBot.id} prompt:${JSON.stringify(reqBot.prompt)}`);
 
 		if (!reqMessages) {
 			throw new Error('no messages provided');
@@ -52,24 +46,6 @@ export const POST: RequestHandler = async ({ request }) => {
 			const tokens = getTokens(msg.content);
 			tokenCount += tokens;
 		});
-
-		// const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 		Authorization: `Bearer ${OPENAI_API_KEY}`
-		// 	},
-		// 	method: 'POST',
-		// 	body: JSON.stringify({
-		// 		input: reqMessages[reqMessages.length - 1].content
-		// 	})
-		// });
-
-		// const moderationData = await moderationRes.json();
-		// const [results] = moderationData.results;
-
-		// if (results.flagged) {
-		// 	throw new Error('Query flagged by openai');
-		// }
 
 		const prompt = JSON.stringify(reqBot.prompt);
 		tokenCount += getTokens(prompt);
