@@ -3,7 +3,7 @@
 	import { browser } from "$app/environment";
 	import MessagePanel  from '$lib/components/MessagePanel.svelte';
 
-	import { allBots, selectedBot, messages } from '$lib/stores'
+	import { allBots, selectedBot, messages, openSide } from '$lib/stores'
 
 	if (browser) {
 		$selectedBot = JSON.parse(localStorage.getItem('selectedBot') || 'null')
@@ -15,6 +15,7 @@
 
 	function handleSelect(name: string) {
 		if (name === $selectedBot.name) return;
+		$openSide = !$openSide
 		$selectedBot = allBots.find(bot => bot.name === name) || $selectedBot;
 		localStorage.setItem('selectedBot', JSON.stringify($selectedBot));
 		$messages = [];
@@ -23,8 +24,9 @@
 </script>
 
 {#if browser}
+
 	<div class="font-sans antialiased h-screen flex bg-gray-900">
-		<div class="flex-none w-64 pb-6 hidden md:block">
+		<div class="flex-none w-64 pb-6  {$openSide ? 'block' : 'hidden md:block' }">
 			<div class="text-white mb-2 mt-3 px-4 flex justify-between">
 				<div class="flex-auto">
 					<h1 class="mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-4xl font-extrabold uppercase tracking-tighter text-transparent">Chatrbot</h1>

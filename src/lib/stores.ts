@@ -28,3 +28,5 @@ export const allBots: Bots = [
 export const selectedBot = writable<Bot>();
 
 export const messages = writable<ChatCompletionRequestMessage[]>([]);
+
+export const openSide = writable<boolean>(false);
