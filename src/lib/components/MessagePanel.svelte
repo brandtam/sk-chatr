@@ -96,7 +96,7 @@
 			<Message type="assistant" message={answer} />
 		{/if}
 		{#if loading}
-			<Message type="assistant" message="Loading.." />
+			<Message type="assistant" message="Thinking..." />
 		{/if}
 		<div bind:this={scrollToDiv} />
 	</div>

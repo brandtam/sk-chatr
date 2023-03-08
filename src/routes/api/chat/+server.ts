@@ -4,6 +4,7 @@ import type { RequestHandler } from './$types';
 import { getTokens } from '$lib/utils/tokenizer';
 import { json } from '@sveltejs/kit';
 import type { Config } from '@sveltejs/adapter-vercel';
+import type { Bot } from '$lib/types';
 
 export const config: Config = {
 	runtime: 'edge'
@@ -19,10 +20,27 @@ export const POST: RequestHandler = async ({ request }) => {
 
 		if (!requestData) {
 			throw new Error('No request data');
+		} else if (!requestData.bot) {
+			throw new Error('No bot provided');
 		}
 
-		const reqMessages: ChatCompletionRequestMessage[] = requestData.messages;
+		if (requestData.bot) {
+			const bot: Bot = requestData.bot;
+			if (!bot.id) {
+				throw new Error('No bot id provided');
+			} else if (!bot.prompt) {
+				throw new Error('No bot prompt provided');
+			}
+		}
+
 		const reqBot = requestData.bot;
+		const botId = Number(reqBot.id);
+		console.log(`\nbotId: ${botId}`);
+
+		const reqMessages: ChatCompletionRequestMessage[] = requestData.messages;
+		console.log(`reqMessages: ${JSON.stringify(reqMessages)}\n`);
+
+		// console.log(`reqBot: id:${reqBot.id} prompt:${JSON.stringify(reqBot.prompt)}`);
 
 		if (!reqMessages) {
 			throw new Error('no messages provided');
@@ -35,25 +53,25 @@ export const POST: RequestHandler = async ({ request }) => {
 			tokenCount += tokens;
 		});
 
-		const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${OPENAI_API_KEY}`
-			},
-			method: 'POST',
-			body: JSON.stringify({
-				input: reqMessages[reqMessages.length - 1].content
-			})
-		});
+		// const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 		Authorization: `Bearer ${OPENAI_API_KEY}`
+		// 	},
+		// 	method: 'POST',
+		// 	body: JSON.stringify({
+		// 		input: reqMessages[reqMessages.length - 1].content
+		// 	})
+		// });
 
-		const moderationData = await moderationRes.json();
-		const [results] = moderationData.results;
+		// const moderationData = await moderationRes.json();
+		// const [results] = moderationData.results;
 
-		if (results.flagged) {
-			throw new Error('Query flagged by openai');
-		}
+		// if (results.flagged) {
+		// 	throw new Error('Query flagged by openai');
+		// }
 
-		const prompt = reqBot.prompt;
+		const prompt = JSON.stringify(reqBot.prompt);
 		tokenCount += getTokens(prompt);
 
 		if (tokenCount >= 4000) {
@@ -66,9 +84,9 @@ export const POST: RequestHandler = async ({ request }) => {
 		];
 
 		const chatRequestOpts: CreateChatCompletionRequest = {
-			model: 'gpt-3.5-turbo',
+			model: 'gpt-3.5-turbo-0301',
 			messages,
-			temperature: 0.9,
+			temperature: 1.2,
 			stream: true
 		};
 
