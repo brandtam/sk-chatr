@@ -71,7 +71,7 @@
 <div class="flex-1 flex flex-col bg-white overflow-hidden">
 	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center flex-none">
 		<div class="flex flex-col">
-			<h3 class="text-grey-darkest mb-1 font-extrabold">{$selectedBot.name}</h3>
+			<div class="text-grey-darkest mb-1 font-extrabold">{$selectedBot.name}</div>
 			<div class="text-grey-dark text-sm truncate">
 				{$selectedBot.occupation}
 			</div>
