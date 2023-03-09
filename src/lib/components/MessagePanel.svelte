@@ -69,12 +69,16 @@
 
 </script>
 <div class="flex-1 flex flex-col bg-white overflow-hidden">
-	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center flex-none">
+	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center justify-between">
 		<div class="flex flex-col">
 			<div class="text-grey-darkest mb-1 font-extrabold">{$selectedBot.name}</div>
 			<div class="text-grey-dark text-sm truncate">
 				{$selectedBot.occupation}
 			</div>
+		</div>
+		<div class="flex ml-10 {$openSide ? 'hidden' : 'block md:hidden' }">
+			<svg class="fill-current h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/></svg>
+			<p>switch chats</p>
 		</div>
 	</div>
 	<div class="px-6 py-4 flex-1 overflow-y-scroll">
