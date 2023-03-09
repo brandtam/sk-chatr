@@ -71,7 +71,7 @@
 </script>
 
 {#if browser}
-<div class="flex-1 flex flex-col bg-gray-800 text-gray-100 overflow-hidden">
+<div class="flex-1 flex flex-col bg-gray-800 text-gray-100 overflow-hidden h-[100dvh]">
 	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center justify-between">
 		<div class="flex flex-col">
 			<div class="text-gray-100 mb-1 font-extrabold">{$selectedBot.name}</div>
