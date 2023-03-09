@@ -36,8 +36,6 @@
   <meta property="og:image" content="https://www.chatr.tech/preview.png" />
 </svelte:head>
 
-{#if browser}
-
 	<div class=" font-sans antialiased h-screen flex bg-gray-900">
 		<div class="flex-none w-64 pb-6  {$openSide ? 'block' : 'hidden md:block' }">
 			<div class="text-white mb-2 mt-3 px-4 flex justify-between">
@@ -65,6 +63,3 @@
 		<MessagePanel />
 
 	</div>
-{:else}
-	<div>Loading...</div>
-{/if}
