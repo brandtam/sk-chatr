@@ -76,7 +76,7 @@
 		<div class="flex flex-col">
 			<div class="text-grey-darkest mb-1 font-extrabold">{$selectedBot.name}</div>
 			<div class="text-grey-dark text-sm truncate">
-				{$selectedBot.occupation}
+				{$selectedBot.bio}
 			</div>
 		</div>
 		<div class="flex ml-10 {$openSide ? 'hidden' : 'block md:hidden' }">
