@@ -70,7 +70,7 @@
 
 {#if browser}
 <div class="flex-1 flex flex-col justify-end bg-gray-800 text-gray-100 overflow-hidden h-screen">
-	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center justify-between">
+	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-4 items-center justify-between">
 		<div class="flex">
 			<img src="{$selectedBot.profile_image}" alt="{$selectedBot.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
 			<div class="flex flex-col">
