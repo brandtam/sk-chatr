@@ -2,7 +2,6 @@
 	import { browser } from '$app/environment';
 	import Message from '$lib/components/Message.svelte';
 	import { selectedBot, messages, openSide } from '$lib/stores'
-
 	import { SSE } from 'sse.js'
 
 	let query: string = ''
@@ -10,7 +9,6 @@
 	let loading: boolean = false
 
 	let scrollToDiv: HTMLDivElement
-
 
 	function scrollToBottom() {
 		setTimeout(function () {
@@ -71,20 +69,23 @@
 </script>
 
 {#if browser}
-<div class="flex-1 flex flex-col bg-gray-800 text-gray-100 overflow-hidden h-[100dvh]">
+<div class="flex-1 flex flex-col justify-end bg-gray-800 text-gray-100 overflow-hidden h-screen">
 	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-2 items-center justify-between">
-		<div class="flex flex-col">
-			<div class="text-gray-100 mb-1 font-extrabold">{$selectedBot.name}</div>
-			<div class="text-gray-200 text-sm truncate">
-				{$selectedBot.bio}
+		<div class="flex">
+			<img src="{$selectedBot.profile_image}" alt="{$selectedBot.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
+			<div class="flex flex-col">
+				<div class="text-gray-100 mb-1 font-extrabold">{$selectedBot.name}</div>
+				<div class="text-gray-200 text-sm truncate">
+					{$selectedBot.bio}
+				</div>
 			</div>
 		</div>
 		<div class="flex ml-10 {$openSide ? 'hidden' : 'block md:hidden' }">
 			<svg class="fill-current h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/></svg>
-			<p>switch chats</p>
+			<p>switch</p>
 		</div>
 	</div>
-	<div class="px-6 py-4 flex-1 overflow-y-scroll">
+	<div class="px-6 py-4 overflow-y-scroll">
 		<Message type="assistant" message="{$selectedBot.greeting}" />
 		{#each $messages as message}
 			<Message type={message.role} message={message.content} />
