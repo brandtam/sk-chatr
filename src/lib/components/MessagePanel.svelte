@@ -12,7 +12,7 @@
 
 	function scrollToBottom() {
 		setTimeout(function () {
-			scrollToDiv.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+			scrollToDiv.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
 		}, 100)
 	}
 
