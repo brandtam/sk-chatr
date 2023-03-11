@@ -6,7 +6,7 @@
 	import SideBarShows from '$lib/components/SideBarShows.svelte';
 	import SideBarCast from '$lib/components/SideBarCast.svelte';
 
-	import { allBots, selectedBot, allShows, selectedShow } from '$lib/stores'
+	import { allBots, selectedBot, allShows, selectedShow, openSide, clickedShow } from '$lib/stores'
 
 	if (browser) {
 		$selectedBot = JSON.parse(localStorage.getItem('selectedBot') || 'null')
@@ -19,6 +19,10 @@
 
 	if (!$selectedShow) {
 		$selectedShow = allShows[0];
+	}
+
+	if (!$clickedShow) {
+		$clickedShow = $selectedShow
 	}
 </script>
 
@@ -35,7 +39,7 @@
 	<div class="basis-1/3">
 		<GithubRepoButton />
 	</div>
-	<div class="bg-gray-900 fixed top-20 left-0 flex z-10">
+	<div class="bg-gray-900 fixed top-20 left-0 flex z-10 w-11/12 rounded-br-lg max-w-md {$openSide ? 'block' : 'hidden' }">
 		<!-- Show Cast -->
 		<SideBarShows />
 
