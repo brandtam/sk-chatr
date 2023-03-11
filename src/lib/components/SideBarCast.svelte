@@ -1,0 +1,34 @@
+<script lang="ts">
+	import { openSide, allBots, selectedBot, messages } from '$lib/stores'
+
+	function handleSelect(name: string) {
+		if (name === $selectedBot.name) return;
+		$openSide = !$openSide
+		$selectedBot = allBots.find(bot => bot.name === name) || $selectedBot;
+		localStorage.setItem('selectedBot', JSON.stringify($selectedBot));
+		$messages = [];
+	};
+</script>
+
+<div class="flex-none w-44 pb-6  {$openSide ? 'block' : 'hidden md:block' }">
+	<!-- <div class="text-white mb-2 mt-3 px-4 flex justify-between">
+		<div class="flex-auto">
+			<h1 class="mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-4xl font-extrabold uppercase tracking-tighter text-transparent">Chatrbot</h1>
+			<div class="flex items-center mb-6">
+				<span class="bg-green rounded-full block w-2 h-2 mr-2"></span>
+				<span class="text-white opacity-50 text-sm">chatr.tech</span>
+			</div>
+		</div>
+	</div> -->
+	<div class="mb-8">
+		<div class="px-4 mb-2 text-white flex justify-between items-center">
+			<div class="opacity-75">Cast:</div>
+		</div>
+		{#each allBots as bot}
+			<div on:keydown on:click|preventDefault={() => handleSelect(bot.name)} class="flex items-center mb-3 px-4 cursor-pointer bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text font-extrabold tracking-tighter text-transparent {bot.name === $selectedBot.name ? 'text-2xl ' : 'text-lg hover:bg-purple-900'}">
+				<span class="rounded-full block w-2 h-2 mr-2 {bot.name === $selectedBot.name ? 'border border-white' : ''} "></span>
+				<span class="">{bot.name}</span>
+			</div>
+		{/each}
+	</div>
+</div>

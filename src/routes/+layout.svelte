@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import '../app.css'
+	import Header from '$lib/components/Header.svelte';
 </script>
 
 <svelte:head>
@@ -12,4 +13,7 @@
 	<meta name="theme-color" content="#eeeeee">
 </svelte:head>
 
+<Header />
+
 <slot />
+
