@@ -1,6 +1,30 @@
 import { writable } from 'svelte/store';
-import type { Bots, Bot } from '$lib/types';
+import type { Bots, Bot, Shows, Show } from '$lib/types';
 import type { ChatCompletionRequestMessage } from 'openai';
+
+export const allShows: Shows = [
+	{
+		id: '1',
+		name: 'Seinfeld',
+		image: '/shows/seinfeld/seinfeld.jpg',
+		display: true,
+		handle: 'seinfeld'
+	},
+	{
+		id: '2',
+		name: 'Friends',
+		image: '/shows/friends/friends.jpg',
+		display: false,
+		handle: 'friends'
+	},
+	{
+		id: '3',
+		name: 'The Office',
+		image: '/shows/the-office/the-office.jpg',
+		display: false,
+		handle: 'the-office'
+	}
+];
 
 export const allBots: Bots = [
 	{
@@ -56,6 +80,8 @@ export const allBots: Bots = [
 ];
 
 export const selectedBot = writable<Bot>();
+
+export const selectedShow = writable<Show>();
 
 export const messages = writable<ChatCompletionRequestMessage[]>([]);
 

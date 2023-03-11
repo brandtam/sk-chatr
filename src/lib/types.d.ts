@@ -10,3 +10,13 @@ export type Bot = {
 };
 
 export type Bots = Array<Bot>;
+
+export type Show = {
+	id: string;
+	name: string;
+	image: string;
+	display: boolean;
+	handle: string;
+};
+
+export type Shows = Array<Show>;

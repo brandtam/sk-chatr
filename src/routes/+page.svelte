@@ -6,14 +6,19 @@
 	import SideBarShows from '$lib/components/SideBarShows.svelte';
 	import SideBarCast from '$lib/components/SideBarCast.svelte';
 
-	import { allBots, selectedBot } from '$lib/stores'
+	import { allBots, selectedBot, allShows, selectedShow } from '$lib/stores'
 
 	if (browser) {
 		$selectedBot = JSON.parse(localStorage.getItem('selectedBot') || 'null')
+		$selectedShow = JSON.parse(localStorage.getItem('selectedShow') || 'null')
 	}
 
 	if (!$selectedBot) {
 		$selectedBot = allBots[0];
+	}
+
+	if (!$selectedShow) {
+		$selectedShow = allShows[0];
 	}
 
 </script>
