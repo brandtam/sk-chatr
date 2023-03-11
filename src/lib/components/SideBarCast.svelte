@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { openSide, allBots, selectedBot, messages } from '$lib/stores'
+	import { openSide, allBots, selectedBot, messages, selectedShow } from '$lib/stores'
 
 	function handleSelect(name: string) {
 		if (name === $selectedBot.name) return;
@@ -25,10 +25,12 @@
 			<div class="opacity-75">Cast:</div>
 		</div>
 		{#each allBots as bot}
-			<div on:keydown on:click|preventDefault={() => handleSelect(bot.name)} class="flex items-center mb-3 px-4 cursor-pointer bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text font-extrabold tracking-tighter text-transparent {bot.name === $selectedBot.name ? 'text-2xl ' : 'text-lg hover:bg-purple-900'}">
-				<span class="rounded-full block w-2 h-2 mr-2 {bot.name === $selectedBot.name ? 'border border-white' : ''} "></span>
-				<span class="">{bot.name}</span>
-			</div>
+			{#if bot.showId === $selectedShow.id}
+				<div on:keydown on:click|preventDefault={() => handleSelect(bot.name)} class="flex items-center mb-3 px-4 cursor-pointer bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text font-extrabold tracking-tighter text-transparent {bot.name === $selectedBot.name ? 'text-2xl ' : 'text-lg hover:bg-purple-900'}">
+					<span class="rounded-full block w-2 h-2 mr-2 {bot.name === $selectedBot.name ? 'border border-white' : ''} "></span>
+					<span class="">{bot.name}</span>
+				</div>
+			{/if}
 		{/each}
 	</div>
 </div>

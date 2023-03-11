@@ -7,6 +7,7 @@ export type Bot = {
 	profile_image: string;
 	bio: string;
 	prompt: string;
+	showId: string;
 };
 
 export type Bots = Array<Bot>;
