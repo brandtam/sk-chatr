@@ -1,9 +1,28 @@
 <script lang="ts">
+	import { browser } from "$app/environment";
 	import MenuGradientButton from "$lib/components/MenuGradientButton.svelte";
 	import GithubRepoButton from "$lib/components/GithubRepoButton.svelte";
+
+	import SideBarShows from '$lib/components/SideBarShows.svelte';
+	import SideBarCast from '$lib/components/SideBarCast.svelte';
+
+	import { allBots, selectedBot, allShows, selectedShow } from '$lib/stores'
+
+	if (browser) {
+		$selectedBot = JSON.parse(localStorage.getItem('selectedBot') || 'null')
+		$selectedShow = JSON.parse(localStorage.getItem('selectedShow') || 'null')
+	}
+
+	if (!$selectedBot) {
+		$selectedBot = allBots[0];
+	}
+
+	if (!$selectedShow) {
+		$selectedShow = allShows[0];
+	}
 </script>
 
-<nav class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 sticky w-full">
+<nav class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 fixed w-full z-20">
 	<div class="flex basis-1/3 items-center">
 		<MenuGradientButton />
 	</div>
@@ -15,5 +34,12 @@
 	</div>
 	<div class="basis-1/3">
 		<GithubRepoButton />
+	</div>
+	<div class="bg-gray-900 fixed top-20 left-0 flex z-10">
+		<!-- Show Cast -->
+		<SideBarShows />
+
+		<!-- Bot Nav -->
+		<SideBarCast />
 	</div>
 </nav>

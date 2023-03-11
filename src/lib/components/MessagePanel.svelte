@@ -69,8 +69,8 @@
 </script>
 
 {#if browser}
-<div class="flex-1 flex flex-col justify-end bg-gray-800 text-gray-100 overflow-hidden">
-	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-4 items-center justify-between">
+<div class="flex flex-col justify-end bg-gray-700 text-gray-100 overflow-hidden">
+	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-4 items-center justify-between sticky top-20 z-2 bg-gray-800">
 		<div class="flex">
 			<img src="{$selectedBot.profile_image}" alt="{$selectedBot.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
 			<div class="flex flex-col">
@@ -81,7 +81,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="px-6 py-4 overflow-y-scroll">
+	<div class="px-6 py-4 overflow-y-scroll sticky top-44 z-1">
 		<Message type="assistant" message="{$selectedBot.greeting}" />
 		{#each $messages as message}
 			<Message type={message.role} message={message.content} />
@@ -92,9 +92,12 @@
 		{#if loading}
 			<Message type="assistant" message="Thinking..." />
 		{/if}
+		<div bind:this={scrollToDiv}>&nbsp;</div>
 
 	</div>
-	<div class="pb-6 px-2 flex-none border-t pt-4" bind:this={scrollToDiv}>
+	<div class=" h-24"></div>
+
+	<div class="pb-6 px-2 border-t pt-4 sticky bottom-4 z-2 bg-gray-700" >
 		<form on:submit|preventDefault={() => handleSubmit()}>
 			<div class="flex rounded-lg border-2 border-grey overflow-hidden">
 				<span class="text-3xl border-r-2 border-grey p-2">
@@ -108,5 +111,5 @@
 
 </div>
 {:else}
-<div class="bg-gray-800">Loading...</div>
+<div class="bg-gray-700">Loading...</div>
 {/if}

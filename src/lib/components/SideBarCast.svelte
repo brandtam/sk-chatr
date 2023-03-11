@@ -10,19 +10,10 @@
 	};
 </script>
 
-<div class="flex-none w-44 pb-6  {$openSide ? 'block' : 'hidden md:block' }">
-	<!-- <div class="text-white mb-2 mt-3 px-4 flex justify-between">
-		<div class="flex-auto">
-			<h1 class="mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-4xl font-extrabold uppercase tracking-tighter text-transparent">Chatrbot</h1>
-			<div class="flex items-center mb-6">
-				<span class="bg-green rounded-full block w-2 h-2 mr-2"></span>
-				<span class="text-white opacity-50 text-sm">chatr.tech</span>
-			</div>
-		</div>
-	</div> -->
+<div class="flex-none w-44 py-6 {$openSide ? 'block' : 'hidden' }">
 	<div class="mb-8">
 		<div class="px-4 mb-2 text-white flex justify-between items-center">
-			<div class="opacity-75">Cast:</div>
+			<div class="border-b-2 border-grey mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-extrabold  tracking-tighter text-transparent">{$selectedShow.name}</div>
 		</div>
 		{#each allBots as bot}
 			{#if bot.showId === $selectedShow.id}

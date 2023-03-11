@@ -2,7 +2,7 @@
 	import { openSide } from '$lib/stores'
 </script>
 
-<button on:click|preventDefault={() => $openSide = !$openSide} on:keyup class="rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 focus:outline-none block md:hidden">
+<button on:click|preventDefault={() => $openSide = !$openSide} on:keyup class="rounded-md hover:bg-gray-800 dark:hover:bg-gray-800 focus:bg-gray-100 dark:focus:bg-gray-800 focus:outline-none">
 	<svg
 		viewBox="0 0 20 20"
 		class="w-10 h-10 fill-[url(#grad1)] hover:fill-[url(#grad2)] stroke-none">
