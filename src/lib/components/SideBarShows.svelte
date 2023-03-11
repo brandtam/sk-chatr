@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { openSide, allShows, selectedShow } from '$lib/stores'
-	console.log(`$selectedShow1`, $selectedShow)
 
 	function handleSelect(id: string) {
 		if (id === $selectedShow.id) return;
 		$openSide = !$openSide
 		$selectedShow = allShows.find(show => show.id === id) || $selectedShow;
 		localStorage.setItem('selectedShow', JSON.stringify($selectedShow));
-		console.log(`$selectedShow`, $selectedShow)
 	};
 </script>
 
