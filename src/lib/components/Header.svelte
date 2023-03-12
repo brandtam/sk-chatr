@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { browser } from "$app/environment";
+	import { clickOutside } from "$lib/utils/clickOutside";
+
 	import MenuGradientButton from "$lib/components/MenuGradientButton.svelte";
 	import GithubRepoButton from "$lib/components/GithubRepoButton.svelte";
 
@@ -24,6 +26,10 @@
 	if (!$clickedShow) {
 		$clickedShow = $selectedShow
 	}
+
+	function handleClickOutside() {
+		$openSide = false;
+	}
 </script>
 
 <nav class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 fixed w-full z-20">
@@ -39,7 +45,7 @@
 	<div class="basis-1/3">
 		<GithubRepoButton />
 	</div>
-	<div class="bg-gray-900 fixed top-20 left-0 flex z-10 w-11/12 rounded-br-lg max-w-md {$openSide ? 'block' : 'hidden' }">
+	<div use:clickOutside on:click_outside={handleClickOutside} class="bg-gray-900 fixed top-20 left-0 flex z-10 w-11/12 rounded-br-lg max-w-md {$openSide ? 'block' : 'hidden' }">
 		<!-- Show Cast -->
 		<SideBarShows />
 

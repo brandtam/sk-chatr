@@ -16,7 +16,7 @@
 <div class="flex-none py-6">
 	<div class="mb-8">
 		<div class="px-4 mb-2 text-white flex justify-between items-center">
-			<div class="border-b-2 border-grey mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-extrabold  tracking-tighter text-transparent">{$selectedShow.name}</div>
+			<div class="border-b-2 border-grey mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-extrabold  tracking-tighter text-transparent">{$clickedShow.name}</div>
 		</div>
 		{#each allBots as bot}
 			{#if bot.showId === $clickedShow.id}

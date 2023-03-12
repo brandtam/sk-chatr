@@ -76,7 +76,7 @@
 			<div class="flex flex-col">
 				<div class="text-gray-100 mb-1 font-extrabold">{$selectedBot.name}</div>
 				<div class="text-gray-200 text-sm truncate">
-					{$selectedBot.bio}
+					{$selectedBot.occupation}
 				</div>
 			</div>
 		</div>

@@ -13,8 +13,6 @@
 	<meta name="theme-color" content="#eeeeee">
 </svelte:head>
 
-
-
 <div class="bg-gray-700 h-screen">
 	<Header />
 	<slot />
