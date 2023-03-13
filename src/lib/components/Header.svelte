@@ -32,7 +32,7 @@
 	}
 </script>
 
-<nav class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 fixed w-full z-20">
+<div class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 w-full z-20">
 	<div class="flex basis-1/3 items-center">
 		<MenuGradientButton />
 	</div>
@@ -52,4 +52,4 @@
 		<!-- Bot Nav -->
 		<SideBarCast />
 	</div>
-</nav>
+</div>
