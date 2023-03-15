@@ -27,7 +27,7 @@
 		$clickedShow = $selectedShow
 	}
 
-	function handleClickOutside(): void {
+	function handleClickOutside() {
 		$openSide = false;
 	}
 </script>
