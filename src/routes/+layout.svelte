@@ -1,6 +1,10 @@
 <script lang="ts">
 	import '../app.css'
 	import Header from '$lib/components/Header.svelte';
+
+	export let data;
+	console.log(`data.shows`, data.shows)
+	console.log(`data.members`, data.members)
 </script>
 
 <svelte:head>
