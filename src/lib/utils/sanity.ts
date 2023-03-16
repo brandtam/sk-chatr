@@ -1,4 +1,7 @@
+import type { Members, SanityShows } from '$lib/types';
 import { createClient, type ClientConfig } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const config: ClientConfig = {
 	projectId: 'rbf8zvhq',
@@ -7,11 +10,17 @@ const config: ClientConfig = {
 	useCdn: true
 };
 
-const client = createClient(config);
+export const client = createClient(config);
+
+const builder = imageUrlBuilder(client);
+
+export function urlFor(source: SanityImageSource) {
+	return builder.image(source);
+}
 
 export const shows = async () => {
 	const query = '*[_type == "group"]';
-	const data = await client.fetch(query);
+	const data: SanityShows = await client.fetch(query);
 
 	if (data) {
 		return {
@@ -29,16 +38,20 @@ export async function fetchGroupMembers(groupId: string) {
     members[]->{
       _id,
       name,
-      email,
+			occupation,
+			image,
+			greeting,
+			bio,
+			prompt
     }
   }`;
 
 	const params = { groupId };
-	const result = await client.fetch(query, params);
+	const data: Members = await client.fetch(query, params);
 
-	if (result) {
+	if (data) {
 		return {
-			members: result
+			members: data
 		};
 	}
 	return {

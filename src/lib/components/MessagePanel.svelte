@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import Message from '$lib/components/Message.svelte';
-	import { selectedBot, messages, openSide } from '$lib/stores'
+	import { selectedMember, messages, openSide } from '$lib/stores'
 	import { SSE } from 'sse.js'
+	import { urlFor } from '$lib/utils/sanity';
 
 	let query: string = ''
 	let answer: string = ''
@@ -24,7 +25,7 @@
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			payload: JSON.stringify({ messages: $messages, bot: $selectedBot })
+			payload: JSON.stringify({ messages: $messages, bot: $selectedMember })
 		})
 
 		query = ''
@@ -72,17 +73,17 @@
 <div class=" flex flex-col flex-1 justify-end bg-gray-700 text-gray-100 overflow-y-scroll ">
 	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-4 items-center justify-between sticky z-2 bg-gray-800">
 		<div class="flex">
-			<img src="{$selectedBot.profile_image}" alt="{$selectedBot.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
+			<img src={urlFor($selectedMember.image).url()} alt="{$selectedMember.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
 			<div class="flex flex-col">
-				<div class="text-gray-100 mb-1 font-extrabold">{$selectedBot.name}</div>
+				<div class="text-gray-100 mb-1 font-extrabold">{$selectedMember.name}</div>
 				<div class="text-gray-200 text-sm truncate">
-					{$selectedBot.occupation}
+					{$selectedMember.occupation}
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="px-6 pt-4 overflow-y-scroll sticky z-1">
-		<Message type="assistant" message="{$selectedBot.greeting}" />
+		<Message type="assistant" message="{$selectedMember.greeting}" />
 		{#each $messages as message}
 			<Message type={message.role} message={message.content} />
 		{/each}
@@ -100,13 +101,10 @@
 				<span on:click|preventDefault={() => handleSubmit() } on:keydown class="text-3xl border-r-2 border-grey p-2">
 					<svg class="fill-current h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M16 10c0 .553-.048 1-.601 1H11v4.399c0 .552-.447.601-1 .601-.553 0-1-.049-1-.601V11H4.601C4.049 11 4 10.553 4 10c0-.553.049-1 .601-1H9V4.601C9 4.048 9.447 4 10 4c.553 0 1 .048 1 .601V9h4.399c.553 0 .601.447.601 1z"/></svg>
 				</span>
-				<input type="hidden" name="persona" value="{$selectedBot.bio}">
+				<input type="hidden" name="persona" value="{$selectedMember.bio}">
 				<input type="text" class="text-white w-full px-4 bg-gray-800" placeholder="Say Something..." bind:value={query} />
 			</div>
 		</form>
 	</div>
-
 </div>
-{:else}
-<div class="bg-gray-700">Loading...</div>
 {/if}

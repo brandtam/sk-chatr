@@ -32,6 +32,7 @@ export type SanityShow = {
 	};
 	bio: string;
 	members: Array<Member>;
+	active: boolean;
 };
 
 export type SanityShows = Array<SanityShow>;
@@ -46,6 +47,8 @@ export type Member = {
 	};
 	bio: string;
 	prompt: string;
+	occupation: string;
+	greeting: string;
 };
 
 export type Members = Array<Member>;

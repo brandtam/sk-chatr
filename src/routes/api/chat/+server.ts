@@ -4,7 +4,7 @@ import type { RequestHandler } from './$types';
 import { getTokens } from '$lib/utils/tokenizer';
 import { json } from '@sveltejs/kit';
 import type { Config } from '@sveltejs/adapter-vercel';
-import type { Bot } from '$lib/types';
+import type { Member } from '$lib/types';
 
 export const config: Config = {
 	runtime: 'edge'
@@ -25,8 +25,8 @@ export const POST: RequestHandler = async ({ request }) => {
 		}
 
 		if (requestData.bot) {
-			const bot: Bot = requestData.bot;
-			if (!bot.id) {
+			const bot: Member = requestData.bot;
+			if (!bot._id) {
 				throw new Error('No bot id provided');
 			} else if (!bot.prompt) {
 				throw new Error('No bot prompt provided');

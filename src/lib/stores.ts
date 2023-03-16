@@ -1,6 +1,56 @@
 import { writable } from 'svelte/store';
 import type { Bots, Bot, Shows, Show, SanityShow, SanityShows, Member, Members } from '$lib/types';
 import type { ChatCompletionRequestMessage } from 'openai';
+import { shows, fetchGroupMembers } from '$lib/utils/sanity';
+
+export const messages = writable<ChatCompletionRequestMessage[]>([]);
+export const openSide = writable<boolean>(false);
+
+export const sanityMembers = writable<Members>([]);
+export const selectedMember = writable<Member>();
+export const sanityShows = writable<SanityShows>([]);
+export const selectedSanityShow = writable<SanityShow>();
+export const clickedSanityShow = writable<SanityShow>();
+
+// shows().then((data) => {
+// 	console.log('data: ', data);
+// 	sanityShows.set(data);
+// 	selectedSanityShow.set(data[0]);
+// 	clickedSanityShow.set(data[0]);
+// });
+
+export async function getSanityShows() {
+	shows().then(
+		(data) => {
+			sanityShows.set(data.shows);
+			selectedSanityShow.set(data.shows[0]);
+			clickedSanityShow.set(data.shows[0]);
+			// return data;
+		},
+		(err) => {
+			console.log('err: ', err);
+			return {
+				status: 500,
+				body: new Error('Internal Server Error')
+			};
+		}
+	);
+}
+getSanityShows();
+
+export async function getMembers(showId: string) {
+	const data = fetchGroupMembers(showId);
+
+	data.then((data) => {
+		sanityMembers.set(data.members.members);
+		return data.members;
+	});
+
+	return {
+		status: 500,
+		body: new Error('Internal Server Error')
+	};
+}
 
 export const allShows: Shows = [
 	{
@@ -160,17 +210,3 @@ export const allBots: Bots = [
 		showId: '3'
 	}
 ];
-
-export const selectedBot = writable<Bot>();
-
-export const selectedShow = writable<Show>();
-
-export const clickedShow = writable<Show>();
-
-export const messages = writable<ChatCompletionRequestMessage[]>([]);
-
-export const openSide = writable<boolean>(false);
-
-export const shows = writable<SanityShow[]>;
-
-export const members = writable<Member[]>;
