@@ -16,7 +16,6 @@
 	function handleCastSelect(id: string) {
 		if (id === $selectedMember._id) return;
 		$selectedMember = $sanityMembers.find(member => member._id === id) || $selectedMember;
-		console.log(`member-clicked`, $selectedMember)
 		$selectedSanityShow = $clickedSanityShow
 		localStorage.setItem('selectedMember', JSON.stringify($selectedMember));
 		localStorage.setItem('selectedSanityShow', JSON.stringify($selectedSanityShow));
@@ -45,7 +44,7 @@
 		</div>
 		{#if $sanityMembers.length === 0}
 			<div class="px-4 mb-2 text-white flex justify-between items-center">
-				<div class="border-b-2 border-grey mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-extrabold  tracking-tighter text-transparent">No Cast</div>
+				<div class="border-b-2 border-grey mt-1 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-2xl font-extrabold  tracking-tighter text-transparent">No Members</div>
 			</div>
 		{:else}
 		{#each $sanityMembers as member}

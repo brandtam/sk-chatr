@@ -7,7 +7,7 @@
 
 	import SideBarShows from '$lib/components/SideBarShows.svelte';
 
-	import { selectedMember, selectedSanityShow, openSide, clickedSanityShow, sanityMembers, sanityShows } from '$lib/stores'
+	import { getMembers, selectedMember, selectedSanityShow, openSide, clickedSanityShow, sanityMembers, sanityShows } from '$lib/stores'
 	import type { SanityShows, Members } from "$lib/types";
 
 	export let shows: SanityShows;
@@ -18,23 +18,27 @@
 		$selectedSanityShow = JSON.parse(localStorage.getItem('selectedSanityShow') || 'null')
 	}
 
-	if (!$sanityMembers || $sanityMembers.length === 0) {
-		$sanityMembers = members
-	}
-
 	if (!$selectedMember) {
 		$selectedMember = members[0];
 	}
 
 	if (!$selectedSanityShow) {
-		$selectedSanityShow = $sanityShows[0];
+		$selectedSanityShow = shows[0];
 	}
 
 	if (!$clickedSanityShow) {
-		$clickedSanityShow = $sanityShows[0];
+		$clickedSanityShow = shows[0];
+	}
+
+	if (!$sanityMembers || $sanityMembers.length === 0) {
+		$sanityMembers = members
+		getMembers($clickedSanityShow._id)
 	}
 
 	function handleClickOutside() {
+		if ($clickedSanityShow._id !== $selectedSanityShow._id) {
+			getMembers($selectedSanityShow._id)
+		}
 		$openSide = false;
 	}
 </script>
