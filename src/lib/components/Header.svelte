@@ -10,7 +10,7 @@
 	import { selectedMember, selectedSanityShow, openSide, clickedSanityShow, sanityMembers, sanityShows } from '$lib/stores'
 	import type { SanityShows, Members } from "$lib/types";
 
-	// export let shows: SanityShows;
+	export let shows: SanityShows;
 	export let members: Members;
 
 	if (browser) {
@@ -54,6 +54,6 @@
 	</div>
 	<div use:clickOutside on:click_outside={handleClickOutside} class="bg-gray-900 fixed top-20 left-0 flex z-10 w-11/12 rounded-br-lg max-w-md {$openSide ? 'block' : 'hidden' }">
 		<!-- Sidebar -->
-		<SideBarShows />
+		<SideBarShows {shows} />
 	</div>
 </div>

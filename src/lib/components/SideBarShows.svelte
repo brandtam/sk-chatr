@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { messages, openSide, selectedSanityShow, clickedSanityShow, sanityMembers, getMembers, selectedMember, sanityShows } from '$lib/stores'
 	import { urlFor } from '$lib/utils/sanity';
+	export let shows
 
 	if (!$clickedSanityShow) {
-		$clickedSanityShow = $sanityShows[0]
+		$clickedSanityShow = shows[0]
 	}
 
 	function handleSelect(id: string) {
