@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { Bots, Bot, Shows, Show } from '$lib/types';
+import type { Bots, Bot, Shows, Show, SanityShow, SanityShows, Member, Members } from '$lib/types';
 import type { ChatCompletionRequestMessage } from 'openai';
 
 export const allShows: Shows = [
@@ -170,3 +170,7 @@ export const clickedShow = writable<Show>();
 export const messages = writable<ChatCompletionRequestMessage[]>([]);
 
 export const openSide = writable<boolean>(false);
+
+export const shows = writable<SanityShow[]>;
+
+export const members = writable<Member[]>;
