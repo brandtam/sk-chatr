@@ -21,3 +21,31 @@ export type Show = {
 };
 
 export type Shows = Array<Show>;
+
+export type SanityShow = {
+	_id: string;
+	name: string;
+	image: {
+		asset: {
+			url: string;
+		};
+	};
+	bio: string;
+	members: Array<Member>;
+};
+
+export type SanityShows = Array<SanityShow>;
+
+export type Member = {
+	_id: string;
+	name: string;
+	image: {
+		asset: {
+			url: string;
+		};
+	};
+	bio: string;
+	prompt: string;
+};
+
+export type Members = Array<Member>;
