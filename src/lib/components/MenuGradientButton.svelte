@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { openSide } from '$lib/stores'
-	import { clickedShow, selectedShow } from '$lib/stores'
+	import { clickedSanityShow, selectedSanityShow } from '$lib/stores'
 
 	function handleClick() {
 		$openSide = !$openSide
-		$clickedShow = $selectedShow
+		$clickedSanityShow = $selectedSanityShow
 	}
 </script>
 

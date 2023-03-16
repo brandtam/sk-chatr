@@ -1,6 +1,12 @@
 <script lang="ts">
 	import '../app.css'
 	import Header from '$lib/components/Header.svelte';
+	import type { Members, SanityShows } from '$lib/types';
+
+	export let data: {
+		shows: SanityShows,
+		members: Members
+	};
 </script>
 
 <svelte:head>
@@ -14,7 +20,7 @@
 </svelte:head>
 
 <div class="bg-gray-700 fixed flex flex-col w-screen h-screen">
-	<Header />
+	<Header shows={data.shows} members={data.members} />
 	<slot />
 </div>
 

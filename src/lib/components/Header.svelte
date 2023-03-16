@@ -6,28 +6,39 @@
 	import GithubRepoButton from "$lib/components/GithubRepoButton.svelte";
 
 	import SideBarShows from '$lib/components/SideBarShows.svelte';
-	import SideBarCast from '$lib/components/SideBarCast.svelte';
 
-	import { allBots, selectedBot, allShows, selectedShow, openSide, clickedShow } from '$lib/stores'
+	import { getMembers, selectedMember, selectedSanityShow, openSide, clickedSanityShow, sanityMembers, sanityShows } from '$lib/stores'
+	import type { SanityShows, Members } from "$lib/types";
+
+	export let shows: SanityShows;
+	export let members: Members;
 
 	if (browser) {
-		$selectedBot = JSON.parse(localStorage.getItem('selectedBot') || 'null')
-		$selectedShow = JSON.parse(localStorage.getItem('selectedShow') || 'null')
+		$selectedMember = JSON.parse(localStorage.getItem('selectedMember') || 'null')
+		$selectedSanityShow = JSON.parse(localStorage.getItem('selectedSanityShow') || 'null')
 	}
 
-	if (!$selectedBot) {
-		$selectedBot = allBots[0];
+	if (!$selectedMember) {
+		$selectedMember = members[0];
 	}
 
-	if (!$selectedShow) {
-		$selectedShow = allShows[0];
+	if (!$selectedSanityShow) {
+		$selectedSanityShow = shows[0];
 	}
 
-	if (!$clickedShow) {
-		$clickedShow = $selectedShow
+	if (!$clickedSanityShow) {
+		$clickedSanityShow = shows[0];
+	}
+
+	if (!$sanityMembers || $sanityMembers.length === 0) {
+		$sanityMembers = members
+		getMembers($clickedSanityShow._id)
 	}
 
 	function handleClickOutside() {
+		if ($clickedSanityShow._id !== $selectedSanityShow._id) {
+			getMembers($selectedSanityShow._id)
+		}
 		$openSide = false;
 	}
 </script>
@@ -46,10 +57,7 @@
 		<GithubRepoButton />
 	</div>
 	<div use:clickOutside on:click_outside={handleClickOutside} class="bg-gray-900 fixed top-20 left-0 flex z-10 w-11/12 rounded-br-lg max-w-md {$openSide ? 'block' : 'hidden' }">
-		<!-- Show Cast -->
-		<SideBarShows />
-
-		<!-- Bot Nav -->
-		<SideBarCast />
+		<!-- Sidebar -->
+		<SideBarShows {shows} />
 	</div>
 </div>
