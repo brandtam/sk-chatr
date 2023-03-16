@@ -30,7 +30,7 @@
 		{#if show.active }
 		<div on:click|preventDefault={() => handleSelect(show._id) } on:keyup class="cursor-pointer mb-4">
 			<div class="bg-white {$clickedSanityShow._id === show._id ? '' : 'opacity-40'} h-18 w-12 flex items-center justify-center text-black text-2xl font-semibold rounded-lg mb-1 overflow-hidden">
-					<img src={urlFor(show.image).url()} alt="{show.name} Group Image">
+					<img src={urlFor(show.image).width(48).height(70).fit('crop').auto('format').url()} alt="{show.name} Group Image">
 			</div>
 			<div class="text-center text-white opacity-50 text-sm">&#8984;{index + 1}</div>
 		</div>

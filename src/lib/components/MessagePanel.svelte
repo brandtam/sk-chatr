@@ -73,7 +73,7 @@
 <div class=" flex flex-col flex-1 justify-end bg-gray-700 text-gray-100 overflow-y-scroll ">
 	<div on:keydown on:click|preventDefault={() => openSideNav()} class="cursor-pointer border-b flex px-6 py-4 items-center justify-between sticky z-2 bg-gray-800">
 		<div class="flex">
-			<img src={urlFor($selectedMember.image).url()} alt="{$selectedMember.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
+			<img src={urlFor($selectedMember.image).width(64).height(64).fit('crop').auto('format').url()} alt="{$selectedMember.name}'s Profile Pic" class="w-16 h-16 rounded mr-3">
 			<div class="flex flex-col">
 				<div class="text-gray-100 mb-1 font-extrabold">{$selectedMember.name}</div>
 				<div class="text-gray-200 text-sm truncate">
