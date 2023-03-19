@@ -4,10 +4,10 @@ import imageUrlBuilder from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const config: ClientConfig = {
-	projectId: 'rbf8zvhq',
-	dataset: 'production',
-	apiVersion: '2023-03-07',
-	useCdn: true
+	projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
+	dataset: import.meta.env.VITE_SANITY_DATASET,
+	apiVersion: import.meta.env.VITE_SANITY_API_VERSION,
+	useCdn: import.meta.env.VITE_SANITY_USE_CDN
 };
 
 export const client = createClient(config);
