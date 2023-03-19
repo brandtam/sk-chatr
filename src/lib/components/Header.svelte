@@ -12,6 +12,7 @@
 
 	export let shows: SanityShows;
 	export let members: Members;
+	export let showNav: boolean;
 
 	if (browser) {
 		$selectedMember = JSON.parse(localStorage.getItem('selectedMember') || 'null')
@@ -45,7 +46,9 @@
 
 <div class="bg-gray-900 text-white p-2 md:p-6 flex flex-row items-center h-20 w-full z-20">
 	<div class="flex basis-1/3 items-center">
-		<MenuGradientButton />
+		{#if showNav}
+			<MenuGradientButton />
+		{/if}
 	</div>
 	<div class="basis-1/3 flex flex-col items-center">
 		<h1 class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text text-4xl font-extrabold tracking-tighter text-transparent px-2">ChatrBot</h1>
