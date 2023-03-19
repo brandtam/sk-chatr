@@ -44,6 +44,7 @@
 		"openai": "^3.2.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-is": "^18.2.0",
 		"sanity": "^3.7.0",
 		"sse.js": "^0.6.1",
 		"styled-components": "^5.3.9"
