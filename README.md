@@ -1,10 +1,10 @@
 # Chatr.tech
 
-A slack style chatbot that uses OpenAI's GPT-3 API to generate responses.
+A slack style chatbot that uses OpenAI's GPT-4 API to generate responses.
 
 ## What it does
 
-The app defines different "bots" to chat with. Each bot has it's own personality and style of responses. The app uses OpenAI's GPT-3 API to generate responses for the bot.
+The app defines different "bots" to chat with. Each bot has it's own personality and style of responses. The app uses OpenAI's GPT-4 API to generate responses for the bot.
 
 ---
 
