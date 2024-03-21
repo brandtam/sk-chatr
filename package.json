@@ -40,7 +40,7 @@
 		"@sanity/image-url": "^1.0.2",
 		"@sanity/vision": "^3.35.2",
 		"@sveltejs/adapter-vercel": "^2.4.3",
-		"gpt3-tokenizer": "^1.1.5",
+		"js-tiktoken": "^1.0.10",
 		"openai": "^3.3.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
